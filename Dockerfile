@@ -3,7 +3,7 @@ FROM --platform=$BUILDPLATFORM rust:alpine AS build
 
 COPY --from=xx / /
 
-RUN apk add --no-cache clang lld
+RUN apk add --no-cache clang lld git
 COPY . /app
 WORKDIR /app
 RUN --mount=type=cache,target=/root/.cargo/git/db \
