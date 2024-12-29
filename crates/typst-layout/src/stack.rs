@@ -17,6 +17,7 @@ pub fn layout_stack(
     locator: Locator,
     styles: StyleChain,
     regions: Regions,
+    align: Align,
 ) -> SourceResult<Fragment> {
     let mut layouter =
         StackLayouter::new(elem.span(), elem.dir(styles), locator, styles, regions);
@@ -75,6 +76,8 @@ struct StackLayouter<'a> {
     styles: StyleChain<'a>,
     /// The regions to layout children into.
     regions: Regions<'a>,
+    /// add align parameter
+    align: Align
     /// Whether the stack itself should expand to fill the region.
     expand: Axes<bool>,
     /// The initial size of the current region before we started subtracting.
@@ -108,6 +111,7 @@ impl<'a> StackLayouter<'a> {
         locator: Locator<'a>,
         styles: StyleChain<'a>,
         mut regions: Regions<'a>,
+        align: Align,
     ) -> Self {
         let axis = dir.axis();
         let expand = regions.expand;
@@ -122,6 +126,7 @@ impl<'a> StackLayouter<'a> {
             locator: locator.split(),
             styles,
             regions,
+            align,
             expand,
             initial: regions.size,
             used: GenericSize::zero(),
@@ -174,6 +179,8 @@ impl<'a> StackLayouter<'a> {
             AlignElem::alignment_in(styles)
         }
         .resolve(styles);
+
+        let align = self.align.resolve(styles);
 
         let fragment = crate::layout_fragment(
             engine,

@@ -20,7 +20,8 @@ RUN --mount=type=cache,target=/root/.cargo/git/db \
     --mount=type=cache,target=/root/.cargo/registry/index \
     OPENSSL_NO_PKG_CONFIG=1 OPENSSL_STATIC=1 \
     OPENSSL_DIR=$(xx-info is-cross && echo /$(xx-info)/usr/ || echo /usr) \
-    xx-cargo build -p typst-cli --release && \
+    RUST_LOG=trace \
+    xx-cargo build -p typst-cli --release --verbose && \
     cp target/$(xx-cargo --print-target-triple)/release/typst target/release/typst && \
     xx-verify target/release/typst
 
@@ -38,5 +39,9 @@ LABEL org.opencontainers.image.title="Typst Docker image"
 LABEL org.opencontainers.image.url="https://typst.app"
 LABEL org.opencontainers.image.vendor="Typst"
 
-COPY --from=build  /app/target/release/typst /bin
-ENTRYPOINT [ "/bin/typst" ]
+COPY --from=build /app/target/release/typst /bin
+
+COPY . /artifact
+
+# シェルを実行
+CMD ["/bin/sh"]
