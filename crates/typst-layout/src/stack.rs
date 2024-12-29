@@ -8,6 +8,7 @@ use typst_library::layout::{
 };
 use typst_syntax::Span;
 use typst_utils::{Get, Numeric};
+use typst_library::layout::Align;
 
 /// Layout the stack.
 #[typst_macros::time(span = elem.span())]
@@ -20,7 +21,7 @@ pub fn layout_stack(
     align: Align,
 ) -> SourceResult<Fragment> {
     let mut layouter =
-        StackLayouter::new(elem.span(), elem.dir(styles), locator, styles, regions);
+        StackLayouter::new(elem.span(), elem.dir(styles), locator, styles, regions, align);
 
     let axis = layouter.dir.axis();
 
@@ -77,7 +78,7 @@ struct StackLayouter<'a> {
     /// The regions to layout children into.
     regions: Regions<'a>,
     /// add align parameter
-    align: Align
+    align: Align,
     /// Whether the stack itself should expand to fill the region.
     expand: Axes<bool>,
     /// The initial size of the current region before we started subtracting.
