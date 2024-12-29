@@ -10,7 +10,9 @@
 https://github.com/typst/typst
 ```
 
-このissueを実装しようとした。
+これは、容易に利用できる軽いlatexのようなOSSです。
+
+そして、今回はこのissueを実装しようとした。
 
 ```
 https://github.com/typst/typst/issues/5633
@@ -26,6 +28,7 @@ https://github.com/typst/typst/issues/5633
 ## クイックスタート
 
 以下，記述事項の説明．
+dockerを起動した状態で、以下を行う。
 
 ```
 docker image pull reiyaohnishi/typst
