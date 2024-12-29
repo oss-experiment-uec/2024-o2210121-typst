@@ -10,6 +10,7 @@ use crate::layout::{
     Spacing,
 };
 use crate::visualize::{Paint, Stroke};
+use crate::align::align::Align;
 
 /// An inline-level container that sizes content.
 ///
@@ -151,6 +152,7 @@ impl InlineElem {
             locator: Locator,
             styles: StyleChain,
             region: Size,
+            align: Align,
         ) -> SourceResult<Vec<InlineItem>>,
     ) -> Self {
         Self::new(callbacks::InlineCallback::new(captured, callback))
@@ -165,6 +167,7 @@ impl Packed<InlineElem> {
         locator: Locator,
         styles: StyleChain,
         region: Size,
+        align: Align,
     ) -> SourceResult<Vec<InlineItem>> {
         self.body().call(engine, locator, styles, region)
     }
@@ -371,6 +374,7 @@ impl BlockElem {
             locator: Locator,
             styles: StyleChain,
             region: Region,
+            align: Align,
         ) -> SourceResult<Frame>,
     ) -> Self {
         Self::new()
@@ -383,13 +387,7 @@ impl BlockElem {
     /// Create a block with a custom multi-region layouter.
     pub fn multi_layouter<T: NativeElement>(
         captured: Packed<T>,
-        f: fn(
-            content: &Packed<T>,
-            engine: &mut Engine,
-            locator: Locator,
-            styles: StyleChain,
-            regions: Regions,
-        ) -> SourceResult<Fragment>,
+        f: fn(&Packed<T>, &mut Engine, Locator, StyleChain, Regions, Align) -> SourceResult<Fragment>,
     ) -> Self {
         Self::new().with_body(Some(BlockBody::MultiLayouter(
             callbacks::BlockMultiCallback::new(captured, f),
@@ -540,6 +538,7 @@ mod callbacks {
             locator: Locator,
             styles: StyleChain,
             region: Size,
+            align: Align,
         ) -> SourceResult<Vec<InlineItem>>
     }
 
@@ -549,6 +548,7 @@ mod callbacks {
             locator: Locator,
             styles: StyleChain,
             region: Region,
+            align: Align,
         ) -> SourceResult<Frame>
     }
 
@@ -558,6 +558,7 @@ mod callbacks {
             locator: Locator,
             styles: StyleChain,
             regions: Regions,
+            align: Align,
         ) -> SourceResult<Fragment>
     }
 }

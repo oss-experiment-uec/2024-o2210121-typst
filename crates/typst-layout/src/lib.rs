@@ -12,6 +12,7 @@ mod repeat;
 mod shapes;
 mod stack;
 mod transforms;
+mod align;
 
 pub use self::flow::{layout_columns, layout_fragment, layout_frame};
 pub use self::grid::{layout_grid, layout_table};
@@ -28,3 +29,4 @@ pub use self::shapes::{
 };
 pub use self::stack::layout_stack;
 pub use self::transforms::{layout_move, layout_rotate, layout_scale, layout_skew};
+pub use self::align::align::Align;

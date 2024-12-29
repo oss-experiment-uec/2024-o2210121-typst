@@ -16,6 +16,7 @@ use crate::layout::{
 };
 use crate::model::{TableCell, TableFooter, TableHLine, TableHeader, TableVLine};
 use crate::visualize::{Paint, Stroke};
+/// use crate::align::align::Align;
 
 /// Arranges content in a grid.
 ///

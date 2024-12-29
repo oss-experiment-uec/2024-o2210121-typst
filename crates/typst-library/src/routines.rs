@@ -26,6 +26,7 @@ use crate::visualize::{
     RectElem, SquareElem,
 };
 use crate::World;
+use crate::align::align::Align;
 
 /// Defines the `Routines` struct.
 macro_rules! routines {
@@ -93,6 +94,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         regions: Regions,
+        align: Align,
     ) -> SourceResult<Fragment>
 
     /// Lays out content into a single region, producing a single frame.
@@ -102,6 +104,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out inline content.
@@ -122,6 +125,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Size,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`ListElem`].
@@ -131,6 +135,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         regions: Regions,
+        align: Align
     ) -> SourceResult<Fragment>
 
     /// Lays out an [`EnumElem`].
@@ -140,6 +145,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         regions: Regions,
+        align: Align,
     ) -> SourceResult<Fragment>
 
     /// Lays out a [`GridElem`].
@@ -149,6 +155,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         regions: Regions,
+        align: Align,
     ) -> SourceResult<Fragment>
 
     /// Lays out a [`TableElem`].
@@ -158,6 +165,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         regions: Regions,
+        align: Align,
     ) -> SourceResult<Fragment>
 
     /// Lays out a [`StackElem`].
@@ -167,6 +175,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         regions: Regions,
+        align: Align,
     ) -> SourceResult<Fragment>
 
     /// Lays out a [`ColumnsElem`].
@@ -176,6 +185,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         regions: Regions,
+        align: Align,
     ) -> SourceResult<Fragment>
 
     /// Lays out a [`MoveElem`].
@@ -185,6 +195,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`RotateElem`].
@@ -194,6 +205,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`ScaleElem`].
@@ -203,6 +215,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`SkewElem`].
@@ -212,6 +225,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`RepeatElem`].
@@ -221,6 +235,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`PadElem`].
@@ -230,6 +245,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         regions: Regions,
+        align: Align,
     ) -> SourceResult<Fragment>
 
     /// Lays out a [`LineElem`].
@@ -239,6 +255,7 @@ routines! {
         _: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`CurveElem`].
@@ -248,6 +265,7 @@ routines! {
         _: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`PathElem`].
@@ -257,6 +275,7 @@ routines! {
         _: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`PolygonElem`].
@@ -266,6 +285,7 @@ routines! {
         _: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`RectElem`].
@@ -275,6 +295,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`SquareElem`].
@@ -284,6 +305,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`EllipseElem`].
@@ -293,6 +315,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out a [`CircleElem`].
@@ -302,6 +325,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out an [`ImageElem`].
@@ -311,6 +335,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Region,
+        align: Align,
     ) -> SourceResult<Frame>
 
     /// Lays out an [`EquationElem`] in a paragraph.
@@ -320,6 +345,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         region: Size,
+        align: Align,
     ) -> SourceResult<Vec<InlineItem>>
 
     /// Lays out an [`EquationElem`] in a flow.
@@ -329,6 +355,7 @@ routines! {
         locator: Locator,
         styles: StyleChain,
         regions: Regions,
+        align: Align,
     ) -> SourceResult<Fragment>
 }
 

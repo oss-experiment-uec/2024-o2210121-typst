@@ -5,6 +5,7 @@ use typst_library::introspection::Locator;
 use typst_library::layout::{
     Abs, Fragment, Frame, PadElem, Point, Regions, Rel, Sides, Size,
 };
+// use crate::align::align::Align;
 
 /// Layout the padded content.
 #[typst_macros::time(span = elem.span())]
@@ -14,6 +15,7 @@ pub fn layout_pad(
     locator: Locator,
     styles: StyleChain,
     regions: Regions,
+    align: Align,
 ) -> SourceResult<Fragment> {
     let padding = Sides::new(
         elem.left(styles).resolve(styles),
@@ -26,7 +28,7 @@ pub fn layout_pad(
     let pod = regions.map(&mut backlog, |size| shrink(size, &padding));
 
     // Layout child into padded regions.
-    let mut fragment = crate::layout_fragment(engine, &elem.body, locator, styles, pod)?;
+    let mut fragment = crate::layout_fragment(engine, &elem.body, locator, styles, pod, align)?;
 
     for frame in &mut fragment {
         grow(frame, &padding);

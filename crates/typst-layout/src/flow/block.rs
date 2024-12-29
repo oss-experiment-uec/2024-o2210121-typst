@@ -143,7 +143,7 @@ pub fn layout_multi_block(
         // If we have content as our body, just layout it.
         Some(BlockBody::Content(body)) => {
             let mut fragment =
-                crate::layout_fragment(engine, body, locator.relayout(), styles, pod)?;
+                crate::layout_fragment(engine, body, locator.relayout(), styles, pod, align)?;
 
             // If the body is automatically sized and produced more than one
             // fragment, ensure that the width was consistent across all
@@ -161,7 +161,7 @@ pub fn layout_multi_block(
                     expand: Axes::new(true, pod.expand.y),
                     ..pod
                 };
-                fragment = crate::layout_fragment(engine, body, locator, styles, pod)?;
+                fragment = crate::layout_fragment(engine, body, locator, styles, pod, align)?;
             }
 
             fragment

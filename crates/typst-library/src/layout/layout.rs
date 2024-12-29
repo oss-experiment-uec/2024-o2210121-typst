@@ -8,6 +8,7 @@ use crate::foundations::{
 };
 use crate::introspection::Locatable;
 use crate::layout::{BlockElem, Size};
+/// use crate::align::align::Align;
 
 /// Provides access to the current outer container's (or page's, if none)
 /// dimensions (width and height).
@@ -82,7 +83,7 @@ impl Show for Packed<LayoutElem> {
     fn show(&self, _: &mut Engine, _: StyleChain) -> SourceResult<Content> {
         Ok(BlockElem::multi_layouter(
             self.clone(),
-            |elem, engine, locator, styles, regions| {
+            |elem, engine, locator, styles, regions, align| {
                 // Gets the current region's base size, which will be the size of the
                 // outer container, or of the page if there is no such container.
                 let Size { x, y } = regions.base();
@@ -97,7 +98,7 @@ impl Show for Packed<LayoutElem> {
                     )?
                     .display();
                 (engine.routines.layout_fragment)(
-                    engine, &result, locator, styles, regions,
+                    engine, &result, locator, styles, regions, align,
                 )
             },
         )

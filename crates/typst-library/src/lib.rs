@@ -25,6 +25,7 @@ pub mod routines;
 pub mod symbols;
 pub mod text;
 pub mod visualize;
+pub mod align;
 
 use std::ops::{Deref, Range};
 
@@ -36,6 +37,8 @@ use crate::foundations::{Array, Bytes, Datetime, Dict, Module, Scope, Styles, Va
 use crate::layout::{Alignment, Dir};
 use crate::text::{Font, FontBook};
 use crate::visualize::Color;
+/// use crate::align::align::Align;
+
 
 /// The environment in which typesetting occurs.
 ///

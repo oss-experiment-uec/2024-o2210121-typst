@@ -6,6 +6,7 @@ use crate::engine::Engine;
 use crate::foundations::{dict, func, Content, Context, Dict, Resolve, Smart};
 use crate::introspection::{Locator, LocatorLink};
 use crate::layout::{Abs, Axes, Length, Region, Size};
+use crate::align::align::Align;
 
 /// Measures the layouted size of content.
 ///
@@ -93,7 +94,7 @@ pub fn measure(
     let link = LocatorLink::measure(here);
     let locator = Locator::link(&link);
 
-    let frame = (engine.routines.layout_frame)(engine, &content, locator, styles, pod)?;
+    let frame = (engine.routines.layout_frame)(engine, &content, locator, styles, pod, align)?;
     let Size { x, y } = frame.size();
     Ok(dict! { "width" => x, "height" => y })
 }

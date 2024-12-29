@@ -12,6 +12,7 @@ use crate::foundations::{
 use crate::html::{attr, tag, HtmlAttr, HtmlElem};
 use crate::layout::{Alignment, BlockElem, Em, HAlignment, Length, VAlignment, VElem};
 use crate::model::{ListItemLike, ListLike, Numbering, NumberingPattern, ParElem};
+use crate::align::align::Align;
 
 /// A numbered list.
 ///
@@ -245,7 +246,7 @@ impl Show for Packed<EnumElem> {
         }
 
         let mut realized =
-            BlockElem::multi_layouter(self.clone(), engine.routines.layout_enum)
+        BlockElem::multi_layouter(self.clone(), engine.routines.layout_enum)
                 .pack()
                 .spanned(self.span());
 
@@ -256,7 +257,7 @@ impl Show for Packed<EnumElem> {
             realized = spacing + realized;
         }
 
-        Ok(realized)
+        Ok(realized?)
     }
 }
 

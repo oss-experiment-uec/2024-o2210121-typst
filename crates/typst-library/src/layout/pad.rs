@@ -2,6 +2,7 @@ use crate::diag::SourceResult;
 use crate::engine::Engine;
 use crate::foundations::{elem, Content, NativeElement, Packed, Show, StyleChain};
 use crate::layout::{BlockElem, Length, Rel};
+use crate::align::align::Align;
 
 /// Adds spacing around content.
 ///

@@ -45,7 +45,7 @@ pub fn layout_frame(
     styles: StyleChain,
     region: Region,
 ) -> SourceResult<Frame> {
-    layout_fragment(engine, content, locator, styles, region.into())
+    layout_fragment(engine, content, locator, styles, region.into(), align)
         .map(Fragment::into_frame)
 }
 
@@ -70,6 +70,7 @@ pub fn layout_fragment(
         locator.track(),
         styles,
         regions,
+        align,
         NonZeroUsize::ONE,
         Rel::zero(),
     )
@@ -98,6 +99,7 @@ pub fn layout_columns(
         locator.track(),
         styles,
         regions,
+        align,
         elem.count(styles),
         elem.gutter(styles),
     )
@@ -117,6 +119,7 @@ fn layout_fragment_impl(
     locator: Tracked<Locator>,
     styles: StyleChain,
     regions: Regions,
+    align,
     columns: NonZeroUsize,
     column_gutter: Rel<Abs>,
 ) -> SourceResult<Fragment> {

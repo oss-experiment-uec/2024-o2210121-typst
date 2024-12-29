@@ -16,6 +16,7 @@ use crate::introspection::{
 use crate::layout::{Abs, Axes, BlockBody, BlockElem, Em, HElem, Length, Region};
 use crate::model::{Numbering, Outlinable, ParElem, Refable, Supplement};
 use crate::text::{FontWeight, LocalName, SpaceElem, TextElem, TextSize};
+use crate::align::align::Align;
 
 /// A section heading.
 ///
@@ -249,6 +250,7 @@ impl Show for Packed<HeadingElem> {
                     Locator::link(&link),
                     styles,
                     pod,
+                    align, 
                 )?
                 .size();
 

@@ -149,7 +149,7 @@ impl<'a> Cell<'a> {
         if disambiguator > 0 {
             locator = locator.split().next_inner(disambiguator as u128);
         }
-        crate::layout_fragment(engine, &self.body, locator, styles, regions)
+        crate::layout_fragment(engine, &self.body, locator, styles, regions, align)
     }
 }
 

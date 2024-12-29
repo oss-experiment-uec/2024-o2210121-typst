@@ -12,6 +12,7 @@ use crate::introspection::Locator;
 use crate::layout::{Abs, Axes, Frame, Length, Region, Size};
 use crate::visualize::RelativeTo;
 use crate::World;
+use crate::align::align::Align;
 
 /// A repeating tiling fill.
 ///
@@ -198,7 +199,7 @@ impl Tiling {
         let styles = StyleChain::new(&library.styles);
         let pod = Region::new(region, Axes::splat(false));
         let mut frame =
-            (engine.routines.layout_frame)(engine, &body, locator, styles, pod)?;
+            (engine.routines.layout_frame)(engine, &body, locator, styles, pod, align)?;
 
         // Set the size of the frame if the size is enforced.
         if let Smart::Custom(size) = size {
