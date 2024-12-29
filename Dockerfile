@@ -6,6 +6,7 @@ COPY --from=xx / /
 RUN apk add --no-cache clang lld git
 COPY . /app
 WORKDIR /app
+
 RUN --mount=type=cache,target=/root/.cargo/git/db \
     --mount=type=cache,target=/root/.cargo/registry/cache \
     --mount=type=cache,target=/root/.cargo/registry/index \
@@ -15,15 +16,19 @@ RUN --mount=type=cache,target=/root/.cargo/git/db \
 ARG TARGETPLATFORM
 
 RUN xx-apk add --no-cache musl-dev openssl-dev openssl-libs-static
+
+ENV CARGO_BUILD_JOBS=2
+
 RUN --mount=type=cache,target=/root/.cargo/git/db \
     --mount=type=cache,target=/root/.cargo/registry/cache \
     --mount=type=cache,target=/root/.cargo/registry/index \
     OPENSSL_NO_PKG_CONFIG=1 OPENSSL_STATIC=1 \
     OPENSSL_DIR=$(xx-info is-cross && echo /$(xx-info)/usr/ || echo /usr) \
     RUST_LOG=trace \
-    xx-cargo build -p typst-cli --release --verbose && \
-    cp target/$(xx-cargo --print-target-triple)/release/typst target/release/typst && \
-    xx-verify target/release/typst
+    xx-cargo build -p typst-cli --release --verbose
+
+RUN cp target/$(xx-cargo --print-target-triple)/release/typst target/release/typst
+RUN xx-verify target/release/typst
 
 FROM alpine:latest
 ARG CREATED

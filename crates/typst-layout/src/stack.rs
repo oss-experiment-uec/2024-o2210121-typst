@@ -4,11 +4,10 @@ use typst_library::foundations::{Content, Packed, Resolve, StyleChain, StyledEle
 use typst_library::introspection::{Locator, SplitLocator};
 use typst_library::layout::{
     Abs, AlignElem, Axes, Axis, Dir, FixedAlignment, Fr, Fragment, Frame, HElem, Point,
-    Regions, Size, Spacing, StackChild, StackElem, VElem,
+    Regions, Size, Spacing, StackChild, StackElem, VElem, align::Align,
 };
 use typst_syntax::Span;
 use typst_utils::{Get, Numeric};
-use typst_library::layout::align;
 
 /// Layout the stack.
 #[typst_macros::time(span = elem.span())]
