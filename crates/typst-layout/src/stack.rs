@@ -8,7 +8,7 @@ use typst_library::layout::{
 };
 use typst_syntax::Span;
 use typst_utils::{Get, Numeric};
-use typst_library::layout::Align;
+use typst_library::layout::align;
 
 /// Layout the stack.
 #[typst_macros::time(span = elem.span())]
